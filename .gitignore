@@ -1,0 +1,6 @@
+*
+
+!.gitignore
+!provision.sh
+!README*
+!Vagrantfile
