@@ -18,6 +18,7 @@ sudo pip install BeautifulSoup
 sudo pip install markdown
 sudo pip install nose
 sudo pip install pyrss2gen
+sudo pip install fake-factory
 sudo apt-get -y install python-imaging
 
 sudo apt-get install libffi-dev python-dev
