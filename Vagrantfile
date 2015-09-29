@@ -28,6 +28,8 @@ Vagrant.configure(2) do |config|
   # Default value: false
   config.ssh.forward_agent = true
 
+  config.vm.synced_folder ".", "/vagrant", disabled: false
+
   # Provider-specific configuration so you can fine-tune various
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
