@@ -21,7 +21,7 @@ sudo pip install pyrss2gen
 sudo pip install fake-factory
 sudo apt-get -y install python-imaging
 
-sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+sudo apt-get -y install build-essential libssl-dev libffi-dev python-dev
 sudo pip install bcrypt
 sudo pip install -Iv passlib==1.6.2
 
