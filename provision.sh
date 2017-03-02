@@ -9,6 +9,7 @@ echo "%admin ALL=NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/admin_conf
 sudo chmod 0440 /etc/sudoers.d/admin_conf
 sudo adduser vagrant admin
 sudo adduser vagrant dev
+exec sudo su -l $USER
 
 # setup python pip (python package manager)
 sudo apt-get -y install python-pip
