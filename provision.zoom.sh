@@ -32,8 +32,12 @@ sudo ln -s /etc/apache2/mods-available/socache_shmcb.load /etc/apache2/mods-enab
 sudo ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/cgi.load
 sudo /etc/init.d/apache2 restart
 
+# Install Locales
+sudo apt-get install language-pack-en-base
+
 # setup datazoomer (python web framework)
 echo "create database if not exists zoomdata" | mysql -uroot -proot
+echo "create database if not exists test" | mysql -uroot -proot
 
 sudo mkdir /work
 sudo chgrp dev /work
@@ -66,6 +70,7 @@ sudo mv dsi.pth /usr/local/lib/python2.7/dist-packages
 mkdir /work/web
 mkdir /work/web/sites
 mkdir /work/web/sites/default
+mkdir -p /work/web/sites/localhost/data/buckets
 mkdir /work/web/apps
 mkdir /work/web/themes
 mkdir /work/web/www
@@ -91,10 +96,12 @@ sudo sed -i'' 's|^dbuser=root|dbuser=dz|' /work/web/sites/default/site.ini
 sudo sed -i'' 's|^dbpass=|dbpass=root2|' /work/web/sites/default/site.ini
 
 mysql -uroot -proot zoomdata < /work/source/libs/datazoomer/setup/database/setup_mysql.sql
+mysql -uroot -proot test < /work/source/libs/datazoomer/setup/database/setup_mysql.sql
 
 # setup the default datazoomer site
 cd /etc/apache2/sites-enabled && sudo rm -f 000-default*
 cd /etc/apache2/sites-enabled && sudo rm -f zoom && sudo ln -s /work/source/libs/datazoomer/setup/apache/zoom zoom.conf
 
+echo "127.0.0.1 database" | sudo tee -a /etc/hosts
 
 sudo reboot
