@@ -2,5 +2,6 @@
 
 !.gitignore
 !provision.sh
+!provision.zoom.sh
 !README*
 !Vagrantfile
