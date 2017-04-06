@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # create certs directory
+mkdir -p /work/certs
 
 # create self signed cert
 sudo openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \

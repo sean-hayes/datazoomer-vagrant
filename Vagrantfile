@@ -27,5 +27,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "provision.updates.sh"
   config.vm.provision "shell", path: "provision.zoom.sh"
   config.vm.provision "shell", path: "provision.zoom.nginx.sh"
+  config.vm.provision "shell", path: "provision.nginx.ssl.sh"
+  # config.vm.provision "shell", path: "provision.zoom.apache.sh"
   config.vm.provision "shell", inline: "sudo reboot"
 end
