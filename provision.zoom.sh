@@ -17,22 +17,15 @@ sudo pip install -Iv passlib==1.6.2
 
 # setup MariaDB (database engine)
 sudo apt-get install software-properties-common
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-sudo add-apt-repository "deb http://mariadb.mirror.iweb.com//repo/10.1/ubuntu trusty main"
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirror.colo-serv.net/repo/10.1/ubuntu xenial main'
 sudo apt-get update
 echo mariadb-server-10.1 mysql-server/root_password password root | sudo debconf-set-selections
 echo mariadb-server-10.1 mysql-server/root_password_again password root | sudo debconf-set-selections
 sudo apt-get -y -q install mariadb-server
 sudo apt-get -y install python-mysqldb
 
-# setup apache (web server)
-sudo apt-get -y install apache2
-sudo ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
-sudo ln -s /etc/apache2/mods-available/socache_shmcb.load /etc/apache2/mods-enabled/socache_shmcb.load
-sudo ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/cgi.load
-sudo /etc/init.d/apache2 restart
-
-# Install Locales
+# Install Locales (used by test harness)
 sudo apt-get install language-pack-en-base
 
 # setup datazoomer (python web framework)
@@ -98,10 +91,4 @@ sudo sed -i'' 's|^dbpass=|dbpass=root2|' /work/web/sites/default/site.ini
 mysql -uroot -proot zoomdata < /work/source/libs/datazoomer/setup/database/setup_mysql.sql
 mysql -uroot -proot test < /work/source/libs/datazoomer/setup/database/setup_mysql.sql
 
-# setup the default datazoomer site
-cd /etc/apache2/sites-enabled && sudo rm -f 000-default*
-cd /etc/apache2/sites-enabled && sudo rm -f zoom && sudo ln -s /work/source/libs/datazoomer/setup/apache/zoom zoom.conf
-
 echo "127.0.0.1 database" | sudo tee -a /etc/hosts
-
-sudo reboot
